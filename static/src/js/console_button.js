@@ -7,7 +7,7 @@ import { patch } from "@web/core/utils/patch";
 import { useService } from "@web/core/utils/hooks";
 import { NumberPopup } from "@point_of_sale/app/utils/input_popups/number_popup";
 
-const LOTTO_TEMPLATE_ID = 6511;
+const LOTTO_INTERNAL_REF = "LOTTO_PAYOUT";
 
 export class ConsoleLogButton extends Component {
     static template = "console_log_button.ConsoleLogButton";
@@ -18,15 +18,21 @@ export class ConsoleLogButton extends Component {
     }
 
     async onClick() {
-        // Find product.product by its template ID
+        // Find product by internal reference (default_code)
         const products = this.pos.models['product.product'].getAll();
-        const product = products.find(p => p.product_tmpl_id?.id === LOTTO_TEMPLATE_ID || p.product_tmpl_id === LOTTO_TEMPLATE_ID);
+        const matchingProducts = products.filter(p => p.default_code === LOTTO_INTERNAL_REF);
 
-        if (!product) {
-            console.log("Available products:", products.map(p => ({ id: p.id, name: p.display_name, tmpl_id: p.product_tmpl_id })));
-            alert("Lotto Payout product not found (Template ID: " + LOTTO_TEMPLATE_ID + ")");
+        if (matchingProducts.length === 0) {
+            alert("Lotto Payout product not found. Please set a product's Internal Reference to: " + LOTTO_INTERNAL_REF);
             return;
         }
+
+        if (matchingProducts.length > 1) {
+            alert("Multiple products found with Internal Reference '" + LOTTO_INTERNAL_REF + "'. Please ensure only one product has this reference.");
+            return;
+        }
+
+        const product = matchingProducts[0];
 
         this.dialog.add(NumberPopup, {
             title: "Lotto Payout Amount",
