@@ -10,7 +10,7 @@ import { NumberPopup } from "@point_of_sale/app/utils/input_popups/number_popup"
 const LOTTO_INTERNAL_REF = "LOTTO_PAYOUT";
 
 export class ConsoleLogButton extends Component {
-    static template = "console_log_button.ConsoleLogButton";
+    static template = "odoo_lotto_payout.ConsoleLogButton";
 
     setup() {
         this.pos = usePos();

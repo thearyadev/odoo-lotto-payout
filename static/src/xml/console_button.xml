@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="console_log_button.ConsoleLogButton">
+    <t t-name="odoo_lotto_payout.ConsoleLogButton">
         <button class="btn btn-secondary control-button btn-lg" style="font-size: 1.8em; padding: 25px 40px;" t-on-click="onClick">
             <i class="fa fa-ticket me-1"/>
             Lotto Payout
