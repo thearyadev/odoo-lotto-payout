@@ -12,6 +12,7 @@
         'point_of_sale._assets_pos': [
             'odoo-lotto-payout/static/src/js/console_button.js',
             'odoo-lotto-payout/static/src/xml/console_button.xml',
+            'odoo-lotto-payout/static/src/scss/console_button.scss',
         ],
     },
     'installable': True,
